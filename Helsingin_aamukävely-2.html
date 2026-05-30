@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Helsingin aamukävely — Vesa &amp; Eeva-Liisa 60v</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C96A;
+    --gold-pale: #FDF6E3;
+    --dark: #1A1208;
+    --brown: #3D2B1F;
+    --green: #2D4A3E;
+    --cream: #FAF5E9;
+    --text: #2C1E10;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--cream);
+    color: var(--text);
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: var(--dark);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 3rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 40%, rgba(201,168,76,0.18) 0%, transparent 70%);
+  }
+
+  .hero-ornament {
+    font-size: 1rem;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.3s forwards;
+  }
+
+  .hero-number {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(7rem, 25vw, 14rem);
+    color: transparent;
+    -webkit-text-stroke: 2px var(--gold);
+    line-height: 1;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.5s forwards;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    color: var(--gold-light);
+    margin: 1rem 0;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.7s forwards;
+  }
+
+  .hero-sub {
+    color: rgba(255,255,255,0.6);
+    font-size: 1rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.9s forwards;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--gold);
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeUp 1s ease 1.4s forwards;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: pulse 2s ease infinite;
+  }
+
+  /* LETTER */
+  .letter-section {
+    background: var(--gold-pale);
+    padding: 5rem 2rem;
+  }
+
+  .letter-inner {
+    max-width: 680px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 2px;
+    padding: 3.5rem;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04);
+    border-top: 4px solid var(--gold);
+    position: relative;
+  }
+
+  .letter-inner::before {
+    content: '❝';
+    font-family: 'Playfair Display', serif;
+    font-size: 6rem;
+    color: var(--gold);
+    opacity: 0.15;
+    position: absolute;
+    top: 1rem;
+    left: 2rem;
+    line-height: 1;
+  }
+
+  .letter-date {
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+
+  .letter-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    line-height: 2;
+    color: var(--brown);
+  }
+
+  .letter-text p + p { margin-top: 1.2rem; }
+
+  .letter-sign {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(201,168,76,0.3);
+    font-size: 0.9rem;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+  }
+
+  /* ROUTE HEADER */
+  .route-header {
+    background: var(--green);
+    color: white;
+    padding: 4rem 2rem;
+    text-align: center;
+  }
+
+  .route-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 4vw, 2.8rem);
+    margin-bottom: 1rem;
+    color: var(--gold-light);
+  }
+
+  .route-header p {
+    opacity: 0.75;
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+  }
+
+  .route-stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 2.5rem;
+    flex-wrap: wrap;
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    color: var(--gold-light);
+    display: block;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.65;
+  }
+
+  /* MAP */
+  .map-section {
+    padding: 0;
+    background: #1a1a1a;
+  }
+
+  .map-section iframe {
+    width: 100%;
+    height: 420px;
+    border: none;
+    display: block;
+  }
+
+  /* STOPS */
+  .stops {
+    padding: 2rem 1.5rem 5rem;
+    max-width: 780px;
+    margin: 0 auto;
+  }
+
+  .stop {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 0 1.5rem;
+    margin-bottom: 0;
+    position: relative;
+  }
+
+  .stop:not(:last-child) .stop-line {
+    position: absolute;
+    left: 29px;
+    top: 60px;
+    bottom: -20px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--gold), rgba(201,168,76,0.2));
+  }
+
+  .stop-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 1.5rem;
+    position: relative;
+  }
+
+  .stop-num {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--gold);
+    color: var(--dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    z-index: 1;
+    box-shadow: 0 4px 12px rgba(201,168,76,0.4);
+  }
+
+  .stop-content {
+    padding: 1.5rem 0 3rem;
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+  }
+
+  .stop:last-child .stop-content {
+    border-bottom: none;
+  }
+
+  .stop-time {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+
+  .stop-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--brown);
+    margin-bottom: 0.3rem;
+  }
+
+  .stop-emoji {
+    font-size: 1.1rem;
+    margin-right: 0.3rem;
+  }
+
+  .stop-address {
+    font-size: 0.8rem;
+    color: #888;
+    margin-bottom: 1.2rem;
+    letter-spacing: 0.05em;
+  }
+
+  .stop-story {
+    font-size: 0.98rem;
+    line-height: 1.85;
+    color: #3a2e22;
+  }
+
+  .stop-story p + p { margin-top: 0.9rem; }
+
+  .fun-fact {
+    background: linear-gradient(135deg, var(--gold-pale), #fff9e8);
+    border-left: 3px solid var(--gold);
+    padding: 1rem 1.2rem;
+    margin: 1.2rem 0;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.9rem;
+    color: var(--brown);
+    font-style: italic;
+  }
+
+  .famous-people {
+    margin-top: 1.2rem;
+  }
+
+  .person {
+    display: flex;
+    gap: 0.8rem;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    align-items: flex-start;
+  }
+
+  .person:last-child { border-bottom: none; }
+
+  .person-icon {
+    font-size: 1.4rem;
+    flex-shrink: 0;
+  }
+
+  .person-name {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    color: var(--brown);
+    font-size: 0.95rem;
+  }
+
+  .person-desc {
+    font-size: 0.88rem;
+    color: #666;
+    line-height: 1.6;
+  }
+
+  .stop-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 1.2rem;
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--green);
+    text-decoration: none;
+    border-bottom: 1px solid var(--green);
+    padding-bottom: 1px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .stop-link:hover { color: var(--gold); border-color: var(--gold); }
+
+  /* IMAGES */
+  .stop-images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+    margin: 1.2rem 0;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .stop-images img {
+    width: 100%;
+    height: 130px;
+    object-fit: cover;
+    display: block;
+  }
+
+  .stop-images img:first-child:last-child {
+    grid-column: 1 / -1;
+    height: 180px;
+  }
+
+  /* FINISH */
+  .finish-section {
+    background: var(--brown);
+    color: white;
+    padding: 5rem 2rem;
+    text-align: center;
+  }
+
+  .finish-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    color: var(--gold-light);
+    margin-bottom: 1rem;
+  }
+
+  .finish-section p {
+    opacity: 0.8;
+    max-width: 500px;
+    margin: 0 auto 2rem;
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  .restaurant-info {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(201,168,76,0.4);
+    border-radius: 8px;
+    padding: 2rem;
+    max-width: 420px;
+    margin: 0 auto 2rem;
+    text-align: left;
+  }
+
+  .restaurant-info h3 {
+    font-family: 'Playfair Display', serif;
+    color: var(--gold-light);
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .restaurant-info p {
+    font-size: 0.9rem;
+    margin-bottom: 0.4rem;
+    opacity: 0.75;
+  }
+
+  .btn-gold {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--dark);
+    padding: 1rem 2.5rem;
+    border-radius: 2px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 700;
+    transition: background 0.2s, transform 0.2s;
+    margin: 0.5rem;
+  }
+
+  .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+  .btn-outline {
+    display: inline-block;
+    border: 1px solid rgba(201,168,76,0.5);
+    color: var(--gold-light);
+    padding: 1rem 2.5rem;
+    border-radius: 2px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: border-color 0.2s, color 0.2s;
+    margin: 0.5rem;
+  }
+
+  .btn-outline:hover { border-color: var(--gold-light); }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark);
+    color: rgba(255,255,255,0.4);
+    text-align: center;
+    padding: 2.5rem 1rem;
+    font-size: 0.82rem;
+    letter-spacing: 0.1em;
+  }
+
+  footer span { color: var(--gold); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 500px) {
+    .letter-inner { padding: 2rem 1.5rem; }
+    .stop-images img { height: 100px; }
+    .route-stats { gap: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-ornament">✦ Vesa &amp; Eeva-Liisa ✦</div>
+  <div class="hero-number">60</div>
+  <p class="hero-sub">Helsingin aamukävely · Kesä 2026</p>
+  <div class="scroll-hint">
+    <span>Selaa alas</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- LETTER -->
+<section class="letter-section">
+  <div class="letter-inner">
+    <div class="letter-date">Helsinki, kesäkuu 2026</div>
+    <div class="letter-text">
+      <p><strong>Vesa ja Eeva-Liisa — onnea 60 vuodesta!</strong></p>
+      <p style="margin-top:1.5rem;">Edessänne on 3,5 km Helsingin kauneimpia maisemia ja historiaa — ja lopussa ansaittu aamupala historiallisessa miljöössä. Seuratkaa opasta pysäkki kerrallaan.</p>
+      <p style="margin-top:1.2rem;"><em>"Kävely on parasta lääkettä."</em> — Hippokrates, n. 400 eKr.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ROUTE HEADER -->
+<section class="route-header">
+  <h2>Teidän reittinne</h2>
+  <p>Sibelius-monumentilta Hietalahden kauppahalliin</p>
+  <div class="route-stats">
+    <div class="stat">
+      <span class="stat-num">3.5</span>
+      <span class="stat-label">kilometriä</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">5</span>
+      <span class="stat-label">pysäkkiä</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">~2</span>
+      <span class="stat-label">tuntia</span>
+    </div>
+  </div>
+</section>
+
+<!-- MAP -->
+<div class="map-section">
+  <iframe
+    src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY&origin=Sibelius+Monument+Helsinki&destination=Ravintola+Piilo+Helsinki&waypoints=Töölö+Rowing+Stadium+Helsinki|Hietaniemi+Cemetery+Helsinki|Lapinlahden+Lähde+Helsinki&mode=walking&language=fi"
+    allowfullscreen
+    loading="lazy">
+  </iframe>
+  <!-- Fallback static map if API key doesn't work -->
+</div>
+
+<!-- STOPS -->
+<div class="stops">
+
+  <!-- STOP 1 -->
+  <div class="stop">
+    <div class="stop-line"></div>
+    <div class="stop-left">
+      <div class="stop-num">1</div>
+    </div>
+    <div class="stop-content">
+      <div class="stop-time">Klo 09:00 · Lähtöpiste</div>
+      <div class="stop-name"><span class="stop-emoji">🎵</span>Sibelius-monumentti</div>
+      <div class="stop-address">Sibeliuksen puisto, Mechelininkatu · Vapaa pääsy · Auki 24/7</div>
+
+      <div class="stop-images">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Sibelius_monument.jpg/1200px-Sibelius_monument.jpg" alt="Sibelius-monumentti" onerror="this.style.display='none'">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Helsinki_-_Sibelius_Park_-_20180728180843.jpg/1280px-Helsinki_-_Sibelius_Park_-_20180728180843.jpg" alt="Sibeliuksen puisto" onerror="this.style.display='none'">
+      </div>
+
+      <div class="stop-story">
+        <p>Tervetuloa matkaan! Edessänne kohoaa yksi Suomen tunnetuimmista veistoksista — 600 teräsputkea, 24 tonnia terästä, ja yksi historiallinen taidekohu.</p>
+        <p>Taiteilija <strong>Eila Hiltunen</strong> voitti suunnittelukilpailun 1961, mutta abstrakti ehdotus ei miellyttänyt kaikkia. Yleisö vaati jotain "tunnistettavampaa." Hiltunen reagoi lisäämällä Sibeliuksen reliefikasvot veistoksen kylkeen — minkä jälkeen kriitikot rauhoittuivat.</p>
+      </div>
+
+      <div class="fun-fact">
+        💡 <strong>Hauska yksityiskohta:</strong> Jean Sibelius kuoli 1957 — kymmenen vuotta ennen kuin hänen muistomerkkinsä paljastettiin. Mies ei koskaan nähnyt sitä. Hän on haudattu Järvenpäähän Ainolaan, ei tänne.
+      </div>
+
+      <div class="stop-story">
+        <p>Tuulisella säällä veistos todella <em>soi</em> — putket värähtelevät ja humisevat. Joskus se kuulostaa urkumusiikkilta, joskus laivapilliltä. Kokeilkaa!</p>
+      </div>
+
+      <a class="stop-link" href="https://www.hamhelsinki.fi/veistos/sibelius-monumentti/" target="_blank">→ Lue lisää HAM:n sivuilta</a>
+    </div>
+  </div>
+
+  <!-- STOP 2 -->
+  <div class="stop">
+    <div class="stop-line"></div>
+    <div class="stop-left">
+      <div class="stop-num">2</div>
+    </div>
+    <div class="stop-content">
+      <div class="stop-time">Klo 09:20 · ~500 m etelään rantaa pitkin</div>
+      <div class="stop-name"><span class="stop-emoji">🚣</span>Töölön soutustadion</div>
+      <div class="stop-address">Merikannontie 4 · Olympia 1952 · Avoinna tapahtumissa</div>
+
+      <div class="stop-images">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/T%C3%B6%C3%B6l%C3%B6_rowing_stadium.jpg/1280px-T%C3%B6%C3%B6l%C3%B6_rowing_stadium.jpg" alt="Töölön soutustadion" onerror="this.style.display='none'">
+      </div>
+
+      <div class="stop-story">
+        <p>Tämä upea art deco -rakennus vuodelta 1952 rakennettiin <strong>Helsingin olympialaisia</strong> varten. Täällä soudettiin olympiakisojen soutukilpailut — ja yleisurheilustadionin sijaan juuri tämä paikka näki usein Suomen kultamitalistoja.</p>
+        <p>Lahdessa sijaitseva kanava toimi kilpailuratana, ja katsomot täyttyivät suomalaisista urheilijoita kannustamassa. Nykyisin paikka on auki lähinnä erikoistapahtumille, mutta jo ulkoapäin arkkitehtuuri kertoo tarinansa.</p>
+      </div>
+
+      <div class="fun-fact">
+        💡 <strong>Olympiafakta:</strong> Helsingin 1952 olympialaiset olivat ensimmäiset sodan jälkeiset kisat, joihin Saksa ja Japani pääsivät osallistumaan uudelleen. Suomi sai isännöidä unelmansa viimein — pelit oli alun perin tarkoitus pitää jo 1940, mutta sota katkaisi suunnitelmat.
+      </div>
+
+      <a class="stop-link" href="https://fi.wikipedia.org/wiki/T%C3%B6%C3%B6l%C3%B6n_soutustadion" target="_blank">→ Lue lisää Wikipediasta</a>
+    </div>
+  </div>
+
+  <!-- STOP 3 -->
+  <div class="stop">
+    <div class="stop-line"></div>
+    <div class="stop-left">
+      <div class="stop-num">3</div>
+    </div>
+    <div class="stop-content">
+      <div class="stop-time">Klo 09:50 · ~700 m etelään</div>
+      <div class="stop-name"><span class="stop-emoji">⛪</span>Hietaniemen hautausmaa</div>
+      <div class="stop-address">Hietaniemenkatu 20 · Auki päivittäin klo 7–22 · Vapaa pääsy</div>
+
+      <div class="stop-images">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Hietaniemi_cemetery_-_panoramio.jpg/1280px-Hietaniemi_cemetery_-_panoramio.jpg" alt="Hietaniemen hautausmaa" onerror="this.style.display='none'">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Hietaniemi_Cemetery_Helsinki_2007.jpg/1200px-Hietaniemi_Cemetery_Helsinki_2007.jpg" alt="Hautausmaa kesällä" onerror="this.style.display='none'">
+      </div>
+
+      <div class="stop-story">
+        <p>Avattu 1829, tämä meren rannalla sijaitseva puistomaisema on Suomen historian suurimpien nimien leposija.</p>
+      </div>
+
+      <div class="famous-people">
+        <div class="person">
+          <div class="person-icon">⚔️</div>
+          <div>
+            <div class="person-name">C.G.E. Mannerheim (1867–1951)</div>
+            <div class="person-desc">Marsalkka, presidentti ja intohimoinen ratsastaja. Rakasti matkustamista ja hyvää ruokaa — kuoli 83-vuotiaana ulkomaanmatkalla Lausannessa.</div>
+          </div>
+        </div>
+        <div class="person">
+          <div class="person-icon">🏋️</div>
+          <div>
+            <div class="person-name">Urho Kekkonen (1900–1986)</div>
+            <div class="person-desc">Presidentti 26 vuotta, vapaapainia harrastanut, hiihtokunnostaan kuuluisa — ja sauna joka ilta. Eli 85-vuotiaaksi. Tässä on elämäntapaohje, joka toimii.</div>
+          </div>
+        </div>
+        <div class="person">
+          <div class="person-icon">⚓</div>
+          <div>
+            <div class="person-name">Mauno Koivisto (1923–2017)</div>
+            <div class="person-desc">Aloitti satamamiehenä, päätyi presidentiksi. Urheilullinen, vaatimaton ja pidetty — eli 93-vuotiaaksi.</div>
+          </div>
+        </div>
+        <div class="person">
+          <div class="person-icon">📖</div>
+          <div>
+            <div class="person-name">Aleksis Kivi (1834–1872)</div>
+            <div class="person-desc">Kirjoitti Seitsemän veljestä ja Nummisuutarit — teokset, joita koko Suomi lukee edelleen. Kiinnostava yksityiskohta: kriitikot haukkuivat hänet elinaikanaan maan rakoon. Tänään hänet on painettu 10 euron seteliin.</div>
+          </div>
+        </div>
+        <div class="person">
+          <div class="person-icon">✍️</div>
+          <div>
+            <div class="person-name">Eino Leino (1878–1926)</div>
+            <div class="person-desc">Kansallisrunoilija, suuri seuramies ja yksi Suomen tuotteliaimpia kirjailijoita — yli 70 teosta 48 vuodessa. Hänen runojaan lainataan puheissa, juhlissa ja korteissa yhä tänään.</div>
+          </div>
+        </div>
+      </div>
+
+      <a class="stop-link" href="https://www.helsinginseurakunnat.fi/hautausmaat/hietaniemi.html" target="_blank">→ Hautausmaan kartta ja historia</a>
+    </div>
+  </div>
+
+  <!-- STOP 4 -->
+  <div class="stop">
+    <div class="stop-line"></div>
+    <div class="stop-left">
+      <div class="stop-num">4</div>
+    </div>
+    <div class="stop-content">
+      <div class="stop-time">Klo 10:30 · ~600 m etelään rantaa pitkin</div>
+      <div class="stop-name"><span class="stop-emoji">🏥</span>Lapinlahden sairaala</div>
+      <div class="stop-address">Lapinlahdenpolku 8 · Lapinlahden Lähde · Auki ma–pe 11–17, la–su 12–17</div>
+
+      <div class="stop-images">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Lapinlahti_hospital_Helsinki.jpg/1280px-Lapinlahti_hospital_Helsinki.jpg" alt="Lapinlahden sairaala" onerror="this.style.display='none'">
+      </div>
+
+      <div class="stop-story">
+        <p>Vuodesta 1841 — tämä kaunis empiretyylin rakennus C. L. Engelin suunnitelmien pohjalta oli Suomen ensimmäinen varsinainen mielisairaala. Yli 150 vuotta se oli paikka, johon yhteiskunta hiljalleen "unohti" mielisairaat. Ulkoapäin se näyttää lähes kartanolta.</p>
+        <p>Sairaala lakkautettiin 2008 ja seisoi tyhjillään vuosia. Sitten kansalaisaktivismi pelasti sen — ja syntyi <strong>Lapinlahden Lähde</strong>: kahvila, mielenterveysaiheinen näyttely, sauna ja kulttuurikeskus.</p>
+      </div>
+
+      <div class="fun-fact">
+        💡 <strong>Aleksis Kivi täällä:</strong> Sama mies jonka haudan ohitse juuri kävelitte — Aleksis Kivi vietti täällä viimeiset vuotensa täysin hoidon varassa. Hän ei enää pystynyt kirjoittamaan, mutta oli silti kirjailija sydämessään loppuun asti.
+      </div>
+
+      <div class="stop-story">
+        <p>Kahvia juodessa voi kuulla oopperalaulajan harjoittelevan käytävällä — se kuuluu taloon. Kannattaa pistäytyä sisälle, pihan lammikossa ui ankkoja ja tunnelma on täysin oma.</p>
+      </div>
+
+      <a class="stop-link" href="https://lapinlahdenlahde.fi" target="_blank">→ lapinlahdenlahde.fi</a>
+    </div>
+  </div>
+
+  <!-- STOP 5 (FINISH) -->
+  <div class="stop">
+    <div class="stop-left">
+      <div class="stop-num" style="background: var(--green); color: white; box-shadow: 0 4px 12px rgba(45,74,62,0.4);">🍳</div>
+    </div>
+    <div class="stop-content">
+      <div class="stop-time">Klo 11:00 · ~500 m itään · Määränpää!</div>
+      <div class="stop-name">Hietalahden kauppahalli &amp; Ravintola Piilo</div>
+      <div class="stop-address">Lönnrotinkatu 34 · Auki ma–ti 8–18, ke 8–21, to–la 8–22, su 10–16</div>
+
+      <div class="stop-story">
+        <p><strong>Kauppahalli</strong> rakennettiin vuonna 1903 arkkitehti Gustaf Nyströmin suunnittelemana punatiilisenä jugend-rakennuksena. Se palveli alun perin kalastajia ja torppareita, jotka toivat tuotteitaan kaupunkiin suoraan mereltä ja maalta. 1980-luvulla rakennus oli jo niin huonossa kunnossa, että se suunniteltiin purettavaksi — mutta helsinkiläisten vahva vastustus pelasti sen. Perusteellinen remontti 2000-luvulla palautti sen loistoon.</p>
+        <p>Hallissa myydään edelleen tuoretta kalaa, poroa, lähiruokaa, juustoja ja marjoja. Se on yksi harvoista helsinkiläisistä kauppahallialueista, jossa perinteinen torihenkinen kaupankäynti on säilynyt elävänä.</p>
+      </div>
+
+      <div class="fun-fact">
+        🏛️ <strong>Historiallinen fakta:</strong> Kauppahalli on yksi Helsingin harvoista jugend-tyylisistä rakennuksista, joka on säilynyt lähes alkuperäisessä asussaan yli 120 vuotta. Sama tiili, sama ilme — vain tuotteet ovat vaihtuneet.
+      </div>
+
+      <div class="stop-story">
+        <p><strong>Ravintola Piilo</strong> löytyy kirjaimellisesti piilosta — kauppahallin sydämestä, sisäänkäynti hallin sisäpuolelta. Nimi ei ole sattuma. Ravintola on pienehkö, tunnelmallinen ja suosittu, joten pöytä kannattaa varata etukäteen.</p>
+      </div>
+
+      <a class="stop-link" href="https://www.hietalahdenkauppahalli.fi" target="_blank">→ hietalahdenkauppahalli.fi</a>
+      <br>
+      <a class="stop-link" href="http://www.ravintolapiilo.com" target="_blank">→ ravintolapiilo.com</a>
+    </div>
+  </div>
+
+</div>
+
+<!-- FINISH SECTION -->
+<section class="finish-section">
+  <h2>Hyvää ruokahalua! 🥂</h2>
+
+  <div class="restaurant-info">
+    <h3>Hietalahden kauppahalli</h3>
+    <p>📍 Lönnrotinkatu 34, 00180 Helsinki</p>
+    <p>🕐 Ma–ti 8–18 · Ke 8–21 · To–La 8–22 · Su 10–16</p>
+  </div>
+
+  <div class="restaurant-info" style="margin-top: 1rem;">
+    <h3>Ravintola Piilo</h3>
+    <p>📍 Kauppahallin sisällä — katso kyltti sisäänkäynnillä</p>
+    <p>📞 +358 41 311 2799</p>
+    <p>🕐 Ma–ti 8–18 · Ke 8–21 · To–La 8–22 · Su 10–16</p>
+  </div>
+
+  <div>
+    <a class="btn-gold" href="https://maps.google.com/?q=Hietalahden+kauppahalli+Helsinki" target="_blank">🗺 Navigoi perille</a>
+    <a class="btn-outline" href="https://www.hietalahdenkauppahalli.fi" target="_blank">Kauppahallin sivuille</a>
+    <a class="btn-outline" href="http://www.ravintolapiilo.com" target="_blank">Ravintola Piilo</a>
+  </div>
+</section>
+
+<footer>
+  Helsingin aamukävely · <span>Vesa &amp; Eeva-Liisa 60v · 2026</span> 🎉
+</footer>
+
+</body>
+</html>
